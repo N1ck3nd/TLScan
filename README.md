@@ -7,7 +7,8 @@ TLScan is a TLS scanner designed to enumerate TLS/SSL protocol versions and ciph
 ```bash
 git clone https://github.com/N1ck3nd/TLScan.git
 cd TLScan
-pip install -r requirements.txt
+python3 -m venv venv
+pip3 install -r requirements.txt
 ```
 
 ## Usage
