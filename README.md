@@ -15,7 +15,7 @@ pip install -r requirements.txt
 To use TLScan, simply run the script and provide the target hostname or IP address as a parameter.
 
 ```bash
-pythong3 tlscan.py <target>
+python3 TLScan3.py <target>
 ```
 
 ## Compatibility
