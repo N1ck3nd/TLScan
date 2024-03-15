@@ -24,4 +24,8 @@ TLScan is only compatible with Python 3.
 
 ## License
 
-TLScan is licensed under the MIT License.
+TLScan is licensed under the [MIT License](https://github.com/ThreatLabsNL/TLScan/blob/master/License.txt).
+
+## Acknowledgements
+
+TLScan was originally developed by [ThreatLabsNL](https://github.com/ThreatLabsNL/TLScan). 
