@@ -13,6 +13,10 @@ from TLS.tcp import TCP, StartTLS
 
 from ASN1 import x509
 
+import requests as req
+import json
+from colorama import Fore
+
 start_tls = {
     'smtp': [25, 587],
     'pop': [110],
@@ -212,6 +216,29 @@ class Enumerator(object):
     def cipher_preference(self):
         pass  # ToDo
 
+
+    def check_cipher_security(self, cipher_name):
+
+            colors = {
+                "insecure": Fore.RED,
+                "weak": Fore.RED,
+                "recommended": Fore.GREEN,
+                "secure": Fore.GREEN
+            }
+
+            try:
+                response = req.get(url="https://ciphersuite.info/api/cs/{}".format(cipher_name))
+                cipher_data = json.loads(response.text)
+
+                security = cipher_data.get(cipher_name, {}).get("security")
+                if security in colors:
+                    return colors[security]
+                else:
+                    return Fore.RESET
+            except:
+                return Fore.RESET
+
+
     @staticmethod
     def get_hash_sig_list():
         h_s_list = []
@@ -221,16 +248,18 @@ class Enumerator(object):
         return h_s_list
 
     def print_cipher(self, cipher, s_kex: ServerKeyExchange):
+        color = self.check_cipher_security(cipher.name)
         if s_kex:
-            self.print_verbose("  [+] {0} ({1} bits) - {dh}{curve}{bits}".
-                               format(cipher.name, cipher.bits, bits="{} bits".
-                                      format(s_kex.key_length() * 8)
-                                      if not s_kex.elliptic else "",
-                                      dh="ECDH" if s_kex.elliptic else "DHE",
-                                      curve=" {} ".format(s_kex.named_curve.name)
-                                      if s_kex.elliptic else " "))
+            self.print_verbose("{0}  [+] {1} ({2} bits) - {dh}{curve}{bits} {endcolor}".
+                            format(color, cipher.name, cipher.bits, endcolor=Fore.RESET, bits="{} bits".
+                                    format(s_kex.key_length() * 8)
+                                    if not s_kex.elliptic else "",
+                                    dh="ECDH" if s_kex.elliptic else "DHE",
+                                    curve=" {} ".format(s_kex.named_curve.name)
+                                    if s_kex.elliptic else " "))
         else:
-            self.print_verbose("  [+] {0} ({1} bits)".format(cipher.name, cipher.bits))
+            self.print_verbose("{0}  [+] {1} ({2} bits) {3}".format(color, cipher.name, cipher.bits, Fore.RESET))
+            
 
     def send_client_hello(self, version, ciphers_tls=ciphers_tls):
         response = None
