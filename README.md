@@ -1,6 +1,6 @@
 # TLScan
 
-TLScan is a TLS scanner designed to enumerate TLS/SSL protocol versions and cipher suite support. It provides color highlighting for easy identification of supported protocols and cipher suites.
+TLScan is a TLS scanner designed to enumerate TLS/SSL protocol versions and cipher suite support. It provides color highlighting by using the [ciphersuite.info](https://ciphersuite.info/) API for easy identification of supported protocols and cipher suites.
 
 ## Installation
 
