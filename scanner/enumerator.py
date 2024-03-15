@@ -218,25 +218,23 @@ class Enumerator(object):
 
 
     def check_cipher_security(self, cipher_name):
+        colors = {
+            "insecure": Fore.RED,
+            "weak": Fore.RED,
+            "recommended": Fore.GREEN,
+            "secure": Fore.GREEN
+        }
 
-            colors = {
-                "insecure": Fore.RED,
-                "weak": Fore.RED,
-                "recommended": Fore.GREEN,
-                "secure": Fore.GREEN
-            }
-
-            try:
-                response = req.get(url="https://ciphersuite.info/api/cs/{}".format(cipher_name))
-                cipher_data = json.loads(response.text)
-
-                security = cipher_data.get(cipher_name, {}).get("security")
-                if security in colors:
-                    return colors[security]
-                else:
-                    return Fore.RESET
-            except:
+        try:
+            response = req.get(url="https://ciphersuite.info/api/cs/{}".format(cipher_name))
+            cipher_data = json.loads(response.text)
+            security = cipher_data.get(cipher_name, {}).get("security")
+            if security in colors:
+                return colors[security]
+            else:
                 return Fore.RESET
+        except:
+            return Fore.RESET
 
 
     @staticmethod
