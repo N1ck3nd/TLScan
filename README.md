@@ -7,7 +7,7 @@ TLScan is a TLS scanner designed to enumerate TLS/SSL protocol versions and ciph
 To use TLScan, simply run the script and provide the target hostname or IP address as a parameter.
 
 ```bash
-python tlscan.py <target host>
+python tlscan.py <target>
 ```
 
 ## Compatibility
