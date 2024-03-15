@@ -1,8 +1,19 @@
 # TLScan
 
-TLS scanner to enumerate TLS/SSL protocol version and cipher-suite support.
+TLScan is a TLS scanner designed to enumerate TLS/SSL protocol versions and cipher suite support. It provides color highlighting for easy identification of supported protocols and cipher suites.
 
-Created in order not to have to rely on tools that have external dependancies (e.g. OpenSSL).
+## Usage
 
-TLScan3 only works with Python3
+To use TLScan, simply run the script and provide the target hostname or IP address as a parameter.
 
+```bash
+python tlscan.py <target host>
+```
+
+## Compatibility
+
+TLScan is only compatible with Python 3.
+
+## License
+
+TLScan is licensed under the MIT License.
